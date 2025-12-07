@@ -13,4 +13,5 @@ My AOC 2025 solutions.
 | [Day 4](https://adventofcode.com/2025/day/4) | ⭐ | ⭐ |
 | [Day 5](https://adventofcode.com/2025/day/5) | ⭐ | ⭐ |
 | [Day 6](https://adventofcode.com/2025/day/6) | ⭐ | ⭐ |
+| [Day 7](https://adventofcode.com/2025/day/7) | ⭐ | ⭐ |
 <!--- advent_readme_stars table --->
