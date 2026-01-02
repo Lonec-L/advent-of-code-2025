@@ -23,16 +23,36 @@ int name_to_int(const char *s)
 	return (s[0] - 'a') * 26 * 26 + (s[1] - 'a') * 26 + (s[2] - 'a');
 }
 
-int count_paths(struct edge *adj[20000], int a, int goal)
+long long count_paths(struct edge *adj[20000], long long memo[20000][2][2], int a, int goal,
+		      int fft, int dac)
 {
-	if (a == goal) {
-		return 1;
+	if (memo != NULL && memo[a][fft][dac] != -1) {
+		return memo[a][fft][dac];
 	}
+	if (a == goal) {
+		if (fft == 1 && dac == 1) {
+			return 1;
+		}
+		return 0;
+	}
+	int ndac = dac;
+	int nfft = fft;
+	if (a == name_to_int("fft")) {
+		nfft = 1;
+	}
+	if (a == name_to_int("dac")) {
+		ndac = 1;
+	}
+
 	struct edge *curr = adj[a];
-	int res = 0;
+	long long res = 0;
 	while (curr != NULL) {
-		res += count_paths(adj, curr->to, goal);
+		res += count_paths(adj, memo, curr->to, goal, nfft, ndac);
 		curr = curr->next;
+	}
+	if (memo != NULL) {
+		assert(memo[a][fft][dac] == -1 || memo[a][fft][dac] == res);
+		memo[a][fft][dac] = res;
 	}
 	return res;
 }
@@ -69,5 +89,24 @@ int main()
 
 	int start = name_to_int("you");
 	int goal = name_to_int("out");
-	printf("pt1: %i\n", count_paths(adj, start, goal));
+	long long memo[20000][2][2];
+	for (int i = 0; i < 20000; i++) {
+		for (int j = 0; j < 2; j++) {
+			for (int k = 0; k < 2; k++) {
+				memo[i][j][k] = -1;
+			}
+		}
+	}
+	printf("pt1: %lli\n", count_paths(adj, NULL, start, goal, 1, 1));
+
+	// pt2
+	start = name_to_int("svr");
+	for (int i = 0; i < 20000; i++) {
+		for (int j = 0; j < 2; j++) {
+			for (int k = 0; k < 2; k++) {
+				memo[i][j][k] = -1;
+			}
+		}
+	}
+	printf("pt2: %lli\n", count_paths(adj, memo, start, goal, 0, 0));
 }
