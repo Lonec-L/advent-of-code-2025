@@ -18,4 +18,5 @@ My AOC 2025 solutions.
 | [Day 9](https://adventofcode.com/2025/day/9) | ⭐ | ⭐ |
 | [Day 10](https://adventofcode.com/2025/day/10) | ⭐ |   |
 | [Day 11](https://adventofcode.com/2025/day/11) | ⭐ | ⭐ |
+| [Day 12](https://adventofcode.com/2025/day/12) | ⭐ |   |
 <!--- advent_readme_stars table --->
